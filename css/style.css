@@ -2,8 +2,35 @@ body {
     text-align: center;
 }
 
-img {
+.box-model {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 400px;
+    height: 200px;
+    background: rgba(#000,#000,#000,0.8);
+    color: #000;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     border-radius: 10px;
-    width: 101px;
-    height: 171px;
+    font-size: 2.3rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding-top: 6rem;
+    display: none;
+}
+
+.box-model button {
+    text-transform: uppercase;
+    width: 120px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    background: #5163D6;
+    cursor: pointer;
+    font-weight: 800;
+    color: #ffffff;
+}
+.show {
+    display: inline-block !important;
 }

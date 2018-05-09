@@ -82,13 +82,9 @@ var Engine = (function(global) {
     }
     // handle collisions of player with enemies.
     function checkCollisions() {
-    //   allEnemies.forEach(function(enemy) {
-    //       enemy.collesion();
-    //   });
-    enemy1.collesion();
-    enemy2.collesion();
-    enemy3.collesion();
-    
+      allEnemies.forEach(function(enemy) {
+          enemy.collesion();
+      });    
     }
 
     /* This is called by the update function and loops through all of the
@@ -171,7 +167,7 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
+        
     }
 
     /* Go ahead and load all of the images we know we're going to need to

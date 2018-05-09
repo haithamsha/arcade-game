@@ -55,22 +55,42 @@ Enemy.prototype.render = function () {
 
 Enemy.prototype.collesion = function() {
     // Back the player to the first positon if successfully reach to the water
-    if (player.y < -20 && player.y > -42) {
+    if (player.y <= -30) {
         player.x = 200;
         player.y = 420;
+        player.reset();
     }
 
-    let enemyX = Math.ceil(this.x);
-    let enemyY = Math.ceil(this.y);
     // The ranage of collisions
-    let touchSpace = 40;
-    // Back the player to the first position.
-    if ((enemyX >= player.x && enemyX <= player.x + touchSpace)
-     && (enemyY >= player.y && enemyY <= player.y + touchSpace)) {
+    let touchSpaceX = player.x - this.x;
+    let touchSpaceY = player.y - this.y;
+
+    // Back the player to the first position. if the distance between the player and an enemy < 40
+    if (Math.sqrt((Math.pow(touchSpaceX, 2) + Math.pow(touchSpaceY, 2))) < 40) {
         player.x = 200;
         player.y = 400;
     }
 }
+
+// Reset game when the user reach to the water area.
+Player.prototype.reset = function() {
+    const boxModel = document.querySelector("#box-model");
+    boxModel.classList.add("show");
+}
+
+// Reset game when the user reach to the water area.
+Player.prototype.playAgain = function () {
+    const boxModel = document.querySelector("#box-model");
+    boxModel.classList.remove("show");
+}
+
+// Listen to the try again btn.
+const btnTryAgain = document.querySelector("#btnPlayAgain");
+btnTryAgain.addEventListener("click", function(evt) {
+    player.playAgain();
+})
+
+
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -79,21 +99,18 @@ Enemy.prototype.collesion = function() {
 // let enemy = new Enemy(0, 0, 'images/enemy-bug.png');
 // Place all enemy objects in an array called allEnemies
 
-let enemy1 = new Enemy(0, 60, "images/enemy-bug.png", 200);
-let enemy2 = new Enemy(0, 150, "images/enemy-bug.png", 100);
-let enemy3 = new Enemy(0, 230, "images/enemy-bug.png", 70);
-let allEnemies = [];
-allEnemies.push(enemy1);
-allEnemies.push(enemy2);
-allEnemies.push(enemy3);
+let allEnemies = [
+    new Enemy(0, 60, "images/enemy-bug.png", 200),
+    new Enemy(0, 150, "images/enemy-bug.png", 100),
+    new Enemy(0, 230, "images/enemy-bug.png", 70)
+];
+
 
 // Render method for player class
 Player.prototype.render = function () {
    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
-Player.prototype.collesion = function() {
-    return {x: this.x, y: this.y};
-}
+
 Player.prototype.update = function(dt) {
     // Variable represents the player move every time user press key button.
     let singleMovement = 90;
@@ -142,7 +159,7 @@ Player.prototype.handleInput = function(keyCode) {
 }
 
 // Place the player object in a variable called player
-let player = new Player(200, 420, 'images/char-boy.png');
+let player = new Player(200, 420, 'images/char-boy.png',20);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
