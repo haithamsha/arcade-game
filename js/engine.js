@@ -82,9 +82,13 @@ var Engine = (function(global) {
     }
     // handle collisions of player with enemies.
     function checkCollisions() {
-      allEnemies.forEach(function(enemy) {
-          enemy.collesion();
-      });
+    //   allEnemies.forEach(function(enemy) {
+    //       enemy.collesion();
+    //   });
+    enemy1.collesion();
+    enemy2.collesion();
+    enemy3.collesion();
+    
     }
 
     /* This is called by the update function and loops through all of the
@@ -93,13 +97,13 @@ var Engine = (function(global) {
      * player object. These update methods should focus purely on updating
      * the data/properties related to the object. Do your drawing in your
      * render methods.
-     */
-    let enemy = new Enemy();
-    
+     */    
+
     function updateEntities(dt) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
+        player.update();
     }
 
     /* This function initially draws the "game level", it will then call
@@ -180,7 +184,9 @@ var Engine = (function(global) {
         'images/grass-block.png',
         'images/enemy-bug.png',
         'images/char-boy.png',
-        'images/Rock.png'
+        'images/Rock.png',
+        'images/sosa.png',
+        'images/eiso.png'
     ]);
     Resources.onReady(init);
 
